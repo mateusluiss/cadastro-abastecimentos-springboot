@@ -24,4 +24,21 @@ public class CombustivelService {
         return combustivelRepository.findById(id);
     }
 
+    public Combustivel adicionarCombustivel(Combustivel combustivel){
+        return combustivelRepository.save(combustivel);
+    }
+
+    public void deletarCombustivel(Long id){
+        combustivelRepository.deleteById(id);
+    }
+
+    public Optional<Combustivel> atualizarCombustivel(Long id, Combustivel novoCombustivel){
+        return combustivelRepository.findById(id)
+        .map(combustivel -> {
+            combustivel.setNomeCombustivel(novoCombustivel.getNomeCombustivel());
+            combustivel.setPrecoLitro(novoCombustivel.getPrecoLitro());
+            return combustivelRepository.save(combustivel);
+        });
+    }
+
 }
