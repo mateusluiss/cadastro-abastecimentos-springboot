@@ -3,8 +3,13 @@ package com.desafiojr.desafio_01.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,5 +33,21 @@ public class BombaController {
     @GetMapping("/{id}")
     public Optional<BombaCombustivel> listarBombaPorId(@PathVariable Long id){ //Optional enquanto não trata exceções
         return bombaService.listarBombaPorId(id);
+    }
+
+    @PostMapping
+    public BombaCombustivel adicionarBomba(@RequestBody BombaCombustivel bomba){
+        return bombaService.adicionarBomba(bomba);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<BombaCombustivel> deletarBomba(@PathVariable Long id){
+        bombaService.deletarBomba(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}")
+    public Optional<BombaCombustivel> atualizarBomba(@PathVariable Long id, @RequestBody BombaCombustivel bombaNova){
+        return bombaService.atualizarBomba(id, bombaNova);
     }
 }
