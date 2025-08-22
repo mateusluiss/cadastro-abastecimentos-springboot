@@ -1,5 +1,6 @@
 package com.desafiojr.desafio_01.models;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +23,7 @@ public class Combustivel {
     @Column(name = "preco_por_litro")
     @NotNull
     private Double precoLitro;
+
 
     public Combustivel(){
 
@@ -51,6 +53,7 @@ public class Combustivel {
     public void setPrecoLitro(Double precoLitro) {
         this.precoLitro = precoLitro;
     }
+
 
 
 }

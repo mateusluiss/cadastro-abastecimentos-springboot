@@ -1,10 +1,8 @@
 package com.desafiojr.desafio_01.models;
 
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,7 +23,7 @@ public class BombaCombustivel {
     private String nomeBomba;
 
     @NotNull
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "cobustivel_id", referencedColumnName = "id") //Cria FK
     private Combustivel combustivel;
 
@@ -57,4 +55,6 @@ public class BombaCombustivel {
     public void setCombustivel(Combustivel combustivel) {
         this.combustivel = combustivel;
     }
+
+
 }
