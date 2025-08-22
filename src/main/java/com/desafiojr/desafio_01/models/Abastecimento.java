@@ -35,7 +35,6 @@ public class Abastecimento {
     private Double litragem;
 
     @Column(name = "valor_total")
-    @NotNull
     private Double valorTotal;
 
     @CreatedDate
