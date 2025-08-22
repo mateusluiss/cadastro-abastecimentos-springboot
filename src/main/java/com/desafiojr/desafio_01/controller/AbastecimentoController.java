@@ -1,0 +1,44 @@
+package com.desafiojr.desafio_01.controller;
+
+import java.util.List;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.desafiojr.desafio_01.models.Abastecimento;
+import com.desafiojr.desafio_01.service.AbastecimentoService;
+
+@RestController
+@RequestMapping("/api/abastecimentos")
+public class AbastecimentoController {
+    private final AbastecimentoService abastecimentoService;
+
+    public AbastecimentoController(AbastecimentoService abastecimentoService){
+        this.abastecimentoService = abastecimentoService;
+    }
+
+    @GetMapping
+    public List<Abastecimento> listarAbastecimentos(){
+        return abastecimentoService.listarAbastecimentos();
+    }
+
+    @GetMapping("/{id}")
+    public Abastecimento listarAbastecimentoPorId(Long id){
+        return abastecimentoService.listarAbastecimentoPorId(id);
+    }
+
+    @PostMapping
+    public Abastecimento adicionarAbastecimento(Abastecimento abastecimento){
+        return abastecimentoService.adicionarAbastecimento(abastecimento);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarAbastecimento(Long id){
+        abastecimentoService.deletarAbastecimento(id);
+        return ResponseEntity.ok().build();
+    }
+}

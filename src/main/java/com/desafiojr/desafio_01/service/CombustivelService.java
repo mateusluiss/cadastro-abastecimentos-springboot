@@ -1,7 +1,6 @@
 package com.desafiojr.desafio_01.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -20,8 +19,9 @@ public class CombustivelService {
         return combustivelRepository.findAll();
     }
 
-    public Optional<Combustivel> listarCombustivelPorId(Long id){ //Optional enquanto não trata exceções
-        return combustivelRepository.findById(id);
+    public Combustivel listarCombustivelPorId(Long id){ //Optional enquanto não trata exceções
+        return combustivelRepository.findById(id)
+            .orElseThrow();
     }
 
     public Combustivel adicionarCombustivel(Combustivel combustivel){
@@ -32,13 +32,13 @@ public class CombustivelService {
         combustivelRepository.deleteById(id);
     }
 
-    public Optional<Combustivel> atualizarCombustivel(Long id, Combustivel novoCombustivel){
+    public Combustivel atualizarCombustivel(Long id, Combustivel novoCombustivel){
         return combustivelRepository.findById(id)
         .map(combustivel -> {
             combustivel.setNomeCombustivel(novoCombustivel.getNomeCombustivel());
             combustivel.setPrecoLitro(novoCombustivel.getPrecoLitro());
             return combustivelRepository.save(combustivel);
-        });
+        }).orElseThrow();
     }
 
 }

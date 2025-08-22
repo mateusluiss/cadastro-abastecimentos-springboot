@@ -1,7 +1,6 @@
 package com.desafiojr.desafio_01.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,7 +30,7 @@ public class BombaController {
     }
 
     @GetMapping("/{id}")
-    public Optional<BombaCombustivel> listarBombaPorId(@PathVariable Long id){ //Optional enquanto não trata exceções
+    public BombaCombustivel listarBombaPorId(@PathVariable Long id){ //Optional enquanto não trata exceções
         return bombaService.listarBombaPorId(id);
     }
 
@@ -47,7 +46,7 @@ public class BombaController {
     }
 
     @PutMapping("/{id}")
-    public Optional<BombaCombustivel> atualizarBomba(@PathVariable Long id, @RequestBody BombaCombustivel bombaNova){
+    public BombaCombustivel atualizarBomba(@PathVariable Long id, @RequestBody BombaCombustivel bombaNova){
         return bombaService.atualizarBomba(id, bombaNova);
     }
 }

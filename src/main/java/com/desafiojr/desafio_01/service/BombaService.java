@@ -1,7 +1,6 @@
 package com.desafiojr.desafio_01.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -22,8 +21,9 @@ public class BombaService {
         return bombaRepository.findAll();
     }
 
-    public Optional<BombaCombustivel> listarBombaPorId(Long id){ //Coloca Optional enquanto não trata as exceções
-        return bombaRepository.findById(id);
+    public BombaCombustivel listarBombaPorId(Long id){ //Coloca Optional enquanto não trata as exceções
+        return bombaRepository.findById(id)
+            .orElseThrow();
     }
 
     public BombaCombustivel adicionarBomba(BombaCombustivel bomba){
@@ -34,12 +34,12 @@ public class BombaService {
         bombaRepository.deleteById(id);
     }
 
-    public Optional<BombaCombustivel> atualizarBomba(Long id, BombaCombustivel bombaNova){
+    public BombaCombustivel atualizarBomba(Long id, BombaCombustivel bombaNova){
         return bombaRepository.findById(id)
             .map(bomba -> {
                 bomba.setNomeBomba(bombaNova.getNomeBomba());
                 bomba.setCombustivel(bombaNova.getCombustivel());
                 return bombaRepository.save(bomba);
-            });
+            }).orElseThrow();
     }
 }

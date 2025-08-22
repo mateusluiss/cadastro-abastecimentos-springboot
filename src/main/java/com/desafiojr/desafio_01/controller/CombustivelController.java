@@ -1,7 +1,6 @@
 package com.desafiojr.desafio_01.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,7 +30,7 @@ public class CombustivelController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Combustivel> listarCombustivelPorId(@PathVariable Long id){ //Optional enquanto não trata exceções
+    public Combustivel listarCombustivelPorId(@PathVariable Long id){ //Optional enquanto não trata exceções
         return combustivelService.listarCombustivelPorId(id);
     }
 
@@ -47,7 +46,7 @@ public class CombustivelController {
     }
 
     @PutMapping("/{id}")
-    public Optional<Combustivel> atualizarCombustivel(@PathVariable Long id, @RequestBody Combustivel novoCombustivel){
+    public Combustivel atualizarCombustivel(@PathVariable Long id, @RequestBody Combustivel novoCombustivel){
         return combustivelService.atualizarCombustivel(id, novoCombustivel);
     }
     
