@@ -1,11 +1,11 @@
-package com.desafiojr.desafio_01.service;
+package com.desafiojr.desafio_01.services;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.desafiojr.desafio_01.models.Abastecimento;
-import com.desafiojr.desafio_01.repository.AbastecimentoRepository;
+import com.desafiojr.desafio_01.repositories.AbastecimentoRepository;
 
 @Service
 public class AbastecimentoService {

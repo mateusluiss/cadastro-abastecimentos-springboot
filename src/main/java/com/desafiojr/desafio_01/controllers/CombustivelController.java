@@ -1,4 +1,4 @@
-package com.desafiojr.desafio_01.controller;
+package com.desafiojr.desafio_01.controllers;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.desafiojr.desafio_01.models.Combustivel;
-import com.desafiojr.desafio_01.service.CombustivelService;
+import com.desafiojr.desafio_01.services.CombustivelService;
 
 @RestController
 @RequestMapping("/api/combustiveis")
