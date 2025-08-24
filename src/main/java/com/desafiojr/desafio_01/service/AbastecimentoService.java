@@ -1,16 +1,27 @@
 package com.desafiojr.desafio_01.service;
 
+
+import java.time.LocalDateTime;
 import java.util.List;
 
-import com.desafiojr.desafio_01.models.Abastecimento;
-import com.desafiojr.desafio_01.repository.AbastecimentoRepository;
+import org.springframework.stereotype.Service;
 
+import com.desafiojr.desafio_01.DTOs.AbastecimentoDTO;
+import com.desafiojr.desafio_01.mapper.AbastecimentoMapper;
+import com.desafiojr.desafio_01.models.Abastecimento;
+import com.desafiojr.desafio_01.models.BombaCombustivel;
+import com.desafiojr.desafio_01.repository.AbastecimentoRepository;
+import com.desafiojr.desafio_01.repository.BombaRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class AbastecimentoService {
     private final AbastecimentoRepository abastecimentoRepository;
+    private final BombaRepository bombaRepository;
+    private final AbastecimentoMapper mapper;
 
-    public AbastecimentoService(AbastecimentoRepository abastecimentoRepository){
-        this.abastecimentoRepository = abastecimentoRepository;
-    }
 
     public List<Abastecimento> listarAbastecimentos(){
         return abastecimentoRepository.findAll();
@@ -21,8 +32,17 @@ public class AbastecimentoService {
             .orElseThrow();
     }
 
-    public Abastecimento adicionarAbastecimento(Abastecimento abastecimento){
-        return abastecimentoRepository.save(abastecimento);
+    public AbastecimentoDTO adicionarAbastecimento(AbastecimentoDTO abastecimentoDto){
+        BombaCombustivel bomba = bombaRepository.findById(abastecimentoDto.getBombaId())
+            .orElseThrow(() -> new RuntimeException("Bomba não encontrada"));
+        
+        Abastecimento entity = mapper.toEntity(abastecimentoDto);
+        entity.setBombaUsada(bomba);
+        entity.setValorTotal(bomba.getCombustivel().getPrecoLitro() * entity.getLitragem());
+        entity.setDataAbastecimento(LocalDateTime.now());
+
+        Abastecimento save = abastecimentoRepository.save(entity);
+        return mapper.toDto(save);
     }
 
     public void deletarAbastecimento(Long id){

@@ -6,9 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.desafiojr.desafio_01.DTOs.AbastecimentoDTO;
 import com.desafiojr.desafio_01.models.Abastecimento;
 import com.desafiojr.desafio_01.service.AbastecimentoService;
 
@@ -32,8 +34,8 @@ public class AbastecimentoController {
     }
 
     @PostMapping
-    public Abastecimento adicionarAbastecimento(Abastecimento abastecimento){
-        return abastecimentoService.adicionarAbastecimento(abastecimento);
+    public AbastecimentoDTO adicionarAbastecimento(@RequestBody AbastecimentoDTO abastecimentoDto){
+        return abastecimentoService.adicionarAbastecimento(abastecimentoDto);
     }
 
     @DeleteMapping("/{id}")

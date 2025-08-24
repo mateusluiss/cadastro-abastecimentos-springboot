@@ -5,9 +5,11 @@ import java.time.LocalDateTime;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -49,8 +51,6 @@ public class Abastecimento {
     public Abastecimento(BombaCombustivel bombaUsada, Double litragem){
         this.bombaUsada = bombaUsada;
         this.litragem = litragem;
-
-        this.valorTotal = litragem * bombaUsada.getCombustivel().getPrecoLitro();
     }
 
     public Long getId() {
@@ -77,5 +77,15 @@ public class Abastecimento {
         return dataAbastecimento;
     }
 
-    
+    public Double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public void setDataAbastecimento(LocalDateTime dataAbastecimento) {
+        this.dataAbastecimento = dataAbastecimento;
+    }
 }
