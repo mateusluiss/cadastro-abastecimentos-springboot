@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-
+import lombok.NonNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -16,8 +16,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Setter
+@Getter
+@RequiredArgsConstructor
+@NoArgsConstructor
 @Table(name = "abastecimento")
 @EntityListeners(AuditingEntityListener.class)
 public class Abastecimento {
@@ -28,9 +36,11 @@ public class Abastecimento {
 
     @NotNull
     @ManyToOne
+    @NonNull
     @JoinColumn(name = "bomba_id", referencedColumnName = "id")
     private BombaCombustivel bombaUsada;
 
+    @NonNull
     @Column(name = "litragem_combustivel")
     @NotNull
     private Double litragem;
@@ -41,49 +51,4 @@ public class Abastecimento {
     @CreatedDate
     @Column(name = "data_abastecimento")
     private LocalDateTime dataAbastecimento;
-
-    public Abastecimento(){
-
-    }
-
-    public Abastecimento(BombaCombustivel bombaUsada, Double litragem){
-        this.bombaUsada = bombaUsada;
-        this.litragem = litragem;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public BombaCombustivel getBombaUsada() {
-        return bombaUsada;
-    }
-
-    public void setBombaUsada(BombaCombustivel bombaUsada) {
-        this.bombaUsada = bombaUsada;
-    }
-
-    public Double getLitragem() {
-        return litragem;
-    }
-
-    public void setLitragem(Double litragem) {
-        this.litragem = litragem;
-    }
-
-    public LocalDateTime getDataAbastecimento() {
-        return dataAbastecimento;
-    }
-
-    public Double getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(Double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public void setDataAbastecimento(LocalDateTime dataAbastecimento) {
-        this.dataAbastecimento = dataAbastecimento;
-    }
 }

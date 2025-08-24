@@ -8,7 +8,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "combustivel")
 public class Combustivel {
@@ -23,37 +31,6 @@ public class Combustivel {
     @Column(name = "preco_por_litro")
     @NotNull
     private Double precoLitro;
-
-
-    public Combustivel(){
-
-    }
-
-    public Combustivel(String nomeCombustivel, Double precoLitro){
-        this.nomeCombustivel = nomeCombustivel;
-        this.precoLitro = precoLitro;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNomeCombustivel() {
-        return nomeCombustivel;
-    }
-
-    public void setNomeCombustivel(String nomeCombustivel) {
-        this.nomeCombustivel = nomeCombustivel;
-    }
-
-    public Double getPrecoLitro() {
-        return precoLitro;
-    }
-
-    public void setPrecoLitro(Double precoLitro) {
-        this.precoLitro = precoLitro;
-    }
-
 
 
 }

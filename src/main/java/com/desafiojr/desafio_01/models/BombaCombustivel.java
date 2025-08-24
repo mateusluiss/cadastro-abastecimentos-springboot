@@ -10,7 +10,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @Entity
 @Table(name = "bomba")
 public class BombaCombustivel {
@@ -26,35 +34,6 @@ public class BombaCombustivel {
     @ManyToOne
     @JoinColumn(name = "cobustivel_id", referencedColumnName = "id") //Cria FK
     private Combustivel combustivel;
-
-    public BombaCombustivel(){
-
-    }
-
-    public BombaCombustivel(String nomeBomba, Combustivel combustivel){
-        this.nomeBomba = nomeBomba;
-        this.combustivel = combustivel;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNomeBomba() {
-        return nomeBomba;
-    }
-
-    public void setNomeBomba(String nomeBomba) {
-        this.nomeBomba = nomeBomba;
-    }
-
-    public Combustivel getCombustivel() {
-        return combustivel;
-    }
-
-    public void setCombustivel(Combustivel combustivel) {
-        this.combustivel = combustivel;
-    }
 
 
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.desafiojr.desafio_01.DTOs.CombustivelDTO;
 import com.desafiojr.desafio_01.models.Combustivel;
 import com.desafiojr.desafio_01.services.CombustivelService;
 
@@ -35,7 +36,7 @@ public class CombustivelController {
     }
 
     @PostMapping
-    public Combustivel adicionarCombustivel(@RequestBody Combustivel combustivel){
+    public CombustivelDTO adicionarCombustivel(@RequestBody CombustivelDTO combustivel){
         return combustivelService.adicionarCombustivel(combustivel);
     }
 
@@ -46,7 +47,7 @@ public class CombustivelController {
     }
 
     @PutMapping("/{id}")
-    public Combustivel atualizarCombustivel(@PathVariable Long id, @RequestBody Combustivel novoCombustivel){
+    public CombustivelDTO atualizarCombustivel(@PathVariable Long id, @RequestBody CombustivelDTO novoCombustivel){
         return combustivelService.atualizarCombustivel(id, novoCombustivel);
     }
     
