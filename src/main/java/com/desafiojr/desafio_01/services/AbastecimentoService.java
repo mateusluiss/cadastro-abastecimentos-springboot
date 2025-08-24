@@ -1,4 +1,4 @@
-package com.desafiojr.desafio_01.service;
+package com.desafiojr.desafio_01.services;
 
 
 import java.time.LocalDateTime;
@@ -10,9 +10,8 @@ import com.desafiojr.desafio_01.DTOs.AbastecimentoDTO;
 import com.desafiojr.desafio_01.mapper.AbastecimentoMapper;
 import com.desafiojr.desafio_01.models.Abastecimento;
 import com.desafiojr.desafio_01.models.BombaCombustivel;
-import com.desafiojr.desafio_01.repository.AbastecimentoRepository;
-import com.desafiojr.desafio_01.repository.BombaRepository;
-
+import com.desafiojr.desafio_01.repositories.BombaRepository;
+import com.desafiojr.desafio_01.repositories.AbastecimentoRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service

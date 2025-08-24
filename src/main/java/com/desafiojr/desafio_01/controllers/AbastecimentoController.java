@@ -1,4 +1,4 @@
-package com.desafiojr.desafio_01.controller;
+package com.desafiojr.desafio_01.controllers;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.desafiojr.desafio_01.DTOs.AbastecimentoDTO;
 import com.desafiojr.desafio_01.models.Abastecimento;
-import com.desafiojr.desafio_01.service.AbastecimentoService;
+import com.desafiojr.desafio_01.services.AbastecimentoService;
 
 @RestController
 @RequestMapping("/api/abastecimentos")
