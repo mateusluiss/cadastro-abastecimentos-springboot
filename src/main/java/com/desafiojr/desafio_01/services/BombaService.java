@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.desafiojr.desafio_01.exceptions.BombaNotFoundException;
 import com.desafiojr.desafio_01.models.BombaCombustivel;
 import com.desafiojr.desafio_01.repositories.BombaRepository;
 import com.desafiojr.desafio_01.repositories.CombustivelRepository;
@@ -23,7 +24,7 @@ public class BombaService {
 
     public BombaCombustivel listarBombaPorId(Long id){ //Coloca Optional enquanto não trata as exceções
         return bombaRepository.findById(id)
-            .orElseThrow();
+            .orElseThrow(() -> new BombaNotFoundException("Bomba com ID "+id+" não foi encontrada."));
     }
 
     public BombaCombustivel adicionarBomba(BombaCombustivel bomba){
@@ -31,6 +32,9 @@ public class BombaService {
     }
 
     public void deletarBomba(Long id){
+        bombaRepository.findById(id)
+            .orElseThrow(() -> new BombaNotFoundException("Bomba com ID "+id+" não foi encontrada."));
+        
         bombaRepository.deleteById(id);
     }
 
@@ -40,6 +44,6 @@ public class BombaService {
                 bomba.setNomeBomba(bombaNova.getNomeBomba());
                 bomba.setCombustivel(bombaNova.getCombustivel());
                 return bombaRepository.save(bomba);
-            }).orElseThrow();
+            }).orElseThrow(() -> new BombaNotFoundException("Bomba com ID "+id+" não foi encontrada."));
     }
 }

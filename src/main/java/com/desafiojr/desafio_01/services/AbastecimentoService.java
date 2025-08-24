@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.desafiojr.desafio_01.DTOs.AbastecimentoDTO;
+import com.desafiojr.desafio_01.exceptions.BombaNotFoundException;
 import com.desafiojr.desafio_01.mapper.AbastecimentoMapper;
 import com.desafiojr.desafio_01.models.Abastecimento;
 import com.desafiojr.desafio_01.models.BombaCombustivel;
@@ -28,12 +29,12 @@ public class AbastecimentoService {
 
     public Abastecimento listarAbastecimentoPorId(Long id){
         return abastecimentoRepository.findById(id)
-            .orElseThrow();
+            .orElseThrow(() -> new BombaNotFoundException("Abastecimento com ID "+id+" não foi encontrada."));
     }
 
     public AbastecimentoDTO adicionarAbastecimento(AbastecimentoDTO abastecimentoDto){
         BombaCombustivel bomba = bombaRepository.findById(abastecimentoDto.getBombaId())
-            .orElseThrow(() -> new RuntimeException("Bomba não encontrada"));
+            .orElseThrow(() -> new BombaNotFoundException("Abastecimento com ID "+abastecimentoDto.getBombaId()+" não foi encontrada."));
         
         Abastecimento entity = mapper.toEntity(abastecimentoDto);
         entity.setBombaUsada(bomba);
@@ -45,6 +46,9 @@ public class AbastecimentoService {
     }
 
     public void deletarAbastecimento(Long id){
+        abastecimentoRepository.findById(id)
+            .orElseThrow(() -> new BombaNotFoundException("Abastecimento com ID "+id+" não foi encontrada."));
+            
         abastecimentoRepository.deleteById(id);
     }
 }

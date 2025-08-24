@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.desafiojr.desafio_01.exceptions.CombustivelNotFoundException;
 import com.desafiojr.desafio_01.models.Combustivel;
 import com.desafiojr.desafio_01.repositories.CombustivelRepository;
 
@@ -21,7 +22,7 @@ public class CombustivelService {
 
     public Combustivel listarCombustivelPorId(Long id){ //Optional enquanto não trata exceções
         return combustivelRepository.findById(id)
-            .orElseThrow();
+            .orElseThrow(() -> new CombustivelNotFoundException("Combustível com ID "+id+" não foi encontrado."));
     }
 
     public Combustivel adicionarCombustivel(Combustivel combustivel){
@@ -29,6 +30,9 @@ public class CombustivelService {
     }
 
     public void deletarCombustivel(Long id){
+        combustivelRepository.findById(id)
+            .orElseThrow(() -> new CombustivelNotFoundException("Combustível com ID "+id+" não foi encontrado."));
+        
         combustivelRepository.deleteById(id);
     }
 
@@ -38,7 +42,7 @@ public class CombustivelService {
             combustivel.setNomeCombustivel(novoCombustivel.getNomeCombustivel());
             combustivel.setPrecoLitro(novoCombustivel.getPrecoLitro());
             return combustivelRepository.save(combustivel);
-        }).orElseThrow();
+        }).orElseThrow(() -> new CombustivelNotFoundException("Combustível com ID "+id+" não foi encontrado."));
     }
 
 }
