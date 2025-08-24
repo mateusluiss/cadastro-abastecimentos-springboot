@@ -4,19 +4,18 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.desafiojr.desafio_01.DTOs.BombaDTO;
 import com.desafiojr.desafio_01.exceptions.BombaNotFoundException;
+import com.desafiojr.desafio_01.mapper.BombaMapper;
 import com.desafiojr.desafio_01.models.BombaCombustivel;
 import com.desafiojr.desafio_01.repositories.BombaRepository;
-import com.desafiojr.desafio_01.repositories.CombustivelRepository;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class BombaService {
     private final BombaRepository bombaRepository;
-
-
-    public BombaService(BombaRepository bombaRepository, CombustivelRepository combustivelRepository){
-        this.bombaRepository = bombaRepository;
-    }
+    private final BombaMapper mapper;
 
     public List<BombaCombustivel> listarBombas(){
         return bombaRepository.findAll();
@@ -27,8 +26,11 @@ public class BombaService {
             .orElseThrow(() -> new BombaNotFoundException("Bomba com ID "+id+" não foi encontrada."));
     }
 
-    public BombaCombustivel adicionarBomba(BombaCombustivel bomba){
-        return bombaRepository.save(bomba);
+    public BombaDTO adicionarBomba(BombaDTO bomba){
+        BombaCombustivel entity = mapper.toEntity(bomba);
+
+        BombaCombustivel salvo = bombaRepository.save(entity);
+        return mapper.toDto(salvo);
     }
 
     public void deletarBomba(Long id){
@@ -38,12 +40,15 @@ public class BombaService {
         bombaRepository.deleteById(id);
     }
 
-    public BombaCombustivel atualizarBomba(Long id, BombaCombustivel bombaNova){
-        return bombaRepository.findById(id)
+    public BombaDTO atualizarBomba(Long id, BombaDTO bombaNova){
+        BombaCombustivel bombaAtualizada = bombaRepository.findById(id)
             .map(bomba -> {
                 bomba.setNomeBomba(bombaNova.getNomeBomba());
                 bomba.setCombustivel(bombaNova.getCombustivel());
                 return bombaRepository.save(bomba);
             }).orElseThrow(() -> new BombaNotFoundException("Bomba com ID "+id+" não foi encontrada."));
-    }
+            
+            return mapper.toDto(bombaAtualizada);
+        }
+
 }

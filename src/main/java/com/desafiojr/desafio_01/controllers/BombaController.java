@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.desafiojr.desafio_01.DTOs.BombaDTO;
 import com.desafiojr.desafio_01.models.BombaCombustivel;
 import com.desafiojr.desafio_01.services.BombaService;
 
@@ -35,7 +36,7 @@ public class BombaController {
     }
 
     @PostMapping
-    public BombaCombustivel adicionarBomba(@RequestBody BombaCombustivel bomba){
+    public BombaDTO adicionarBomba(@RequestBody BombaDTO bomba){
         return bombaService.adicionarBomba(bomba);
     }
 
@@ -46,7 +47,7 @@ public class BombaController {
     }
 
     @PutMapping("/{id}")
-    public BombaCombustivel atualizarBomba(@PathVariable Long id, @RequestBody BombaCombustivel bombaNova){
+    public BombaDTO atualizarBomba(@PathVariable Long id, @RequestBody BombaDTO bombaNova){
         return bombaService.atualizarBomba(id, bombaNova);
     }
 }
