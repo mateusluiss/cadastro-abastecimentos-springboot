@@ -6,7 +6,7 @@ O sistema foi projetado seguindo a **arquitetura em camadas (Controller → Serv
 
 Este projeto tem como objetivo demonstrar conceitos de:  
 - CRUD com Spring Data JPA  
-- Relacionamentos entre entidades (Ex: Abastecimento ↔ Bomba)  
+- Relacionamentos entre entidades
 - Validações com Bean Validation  
 - Uso de DTOs para entrada e saída de dados  
 - Tratamento de exceções com `@ControllerAdvice`  
